@@ -37,18 +37,13 @@ def log_pass_valid(login, password):
 
 
 def invalid_data_msg():
-    return ("Length of login has to be between " +
-            str(constant.MIN_LOGIN_LENGTH) + " and " +
-            str(constant.MAX_LOGIN_LENGTH) + "\n" +
-            "Password length between " + str(constant.MIN_PASS_LENGTH) +
-            " and " + str(constant.MAX_PASS_LENGTH) + "\n" +
-            "Available symbols are: " + available_symbols
-            )
+    return ("Length of login has to be between {} and {}\nPassword length between {} and {}\nAvailable symbols are: {}".format(
+        constant.MIN_LOGIN_LENGTH, constant.MAX_LOGIN_LENGTH, constant.MIN_PASS_LENGTH, constant.MAX_PASS_LENGTH, available_symbols
+    ))
 
 
 def confirmation_link(token):
-    return 'http://' + config.IP + ':' + str(config.PORT) + "/confirm?token="\
-           + token
+    return 'http://{}:{}/confirm?token={}'.format(config.IP, config.PORT, token)
 
 
 def send_email(recipient, token):
@@ -64,9 +59,7 @@ def send_email(recipient, token):
 
 
 def current_date():
-    now = datetime.datetime.now()
-    return "{}.{}.{} {}:{}:{}".format(now.day, now.month, now.year,
-                                      now.hour, now.minute, now.second)
+    return datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S")
 
 
 def sql_transaction_array_to_json(arrays):
